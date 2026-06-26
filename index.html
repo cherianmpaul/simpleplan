@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>28-Day Insulin-Reset Meal Plan</title>
+<style>
+  :root{
+    --bg:#f1f6ef; --surface:#ffffff; --ink:#13241b; --muted:#5b6b61;
+    --green:#1f6b43; --green-deep:#13492c; --green-soft:#e7f1e8;
+    --accent:#e6a92c; --accent-soft:#fbeed0; --line:#e0e8df;
+    --b1:#1f6b43; --b2:#2f7fb0; --b3:#c98a2b; --b4:#7a4fb0; /* meal time accents */
+    --radius:16px; --shadow:0 1px 2px rgba(20,40,28,.05),0 8px 24px rgba(20,40,28,.06);
+    --max:1080px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 18px}
+  .eyebrow{font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--green); font-weight:700}
+
+  /* Header */
+  header.app{background:var(--green-deep); color:#fff; padding:26px 0 22px}
+  .app-top{display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap}
+  header.app h1{margin:.15em 0 .1em; font-size:1.9rem; line-height:1.1; letter-spacing:-.02em}
+  header.app .sub{color:#cfe3d4; font-size:.95rem; max-width:46ch}
+  header.app .eyebrow{color:#9fd0ad}
+  .printbtn{background:var(--accent); color:#3a2a05; border:0; padding:10px 16px; border-radius:999px;
+    font-weight:700; font-size:.85rem; cursor:pointer; white-space:nowrap}
+  .printbtn:hover{filter:brightness(1.05)}
+  .printbtn:focus-visible{outline:3px solid #fff; outline-offset:2px}
+
+  /* Tabs */
+  nav.tabs{position:sticky; top:0; z-index:20; background:var(--bg); border-bottom:1px solid var(--line)}
+  .tabrow{display:flex; gap:8px; overflow-x:auto; padding:12px 0; scrollbar-width:none}
+  .tabrow::-webkit-scrollbar{display:none}
+  .tab{flex:0 0 auto; border:1px solid var(--line); background:var(--surface); color:var(--muted);
+    padding:9px 16px; border-radius:999px; font-weight:600; font-size:.88rem; cursor:pointer}
+  .tab:hover{border-color:var(--green); color:var(--green)}
+  .tab.active{background:var(--green); border-color:var(--green); color:#fff}
+  .tab:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+
+  main{padding:26px 0 60px}
+  .panel{display:none; animation:fade .25s ease}
+  .panel.active{display:block}
+  @keyframes fade{from{opacity:0; transform:translateY(6px)}to{opacity:1; transform:none}}
+
+  h2.sec{font-size:1.5rem; letter-spacing:-.02em; margin:.2em 0 .1em}
+  .lead{color:var(--muted); max-width:62ch; margin:.2em 0 1.4em}
+
+  /* Rhythm chips */
+  .rhythm{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin:8px 0 22px}
+  .slot{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:14px 16px;
+    border-left:5px solid var(--green)}
+  .slot .t{font-weight:800; font-size:1.05rem}
+  .slot .l{font-size:.8rem; color:var(--muted); text-transform:uppercase; letter-spacing:.08em}
+  .slot.s1{border-left-color:var(--b1)} .slot.s2{border-left-color:var(--b2)}
+  .slot.s3{border-left-color:var(--b3)} .slot.s4{border-left-color:var(--b4)}
+
+  /* Note cards */
+  .notes{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; margin:6px 0 8px}
+  .note{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:16px 18px}
+  .note h3{margin:.1em 0 .35em; font-size:1.02rem; display:flex; gap:8px; align-items:center}
+  .note p{margin:0; color:var(--muted); font-size:.92rem}
+  .note.amber{background:var(--accent-soft); border-color:#f0dca6}
+  .note.amber p{color:#6b541b}
+
+  /* Day grid */
+  .days{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:16px; margin-top:6px}
+  .day{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:16px 16px 12px; box-shadow:var(--shadow)}
+  .day .dh{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:10px}
+  .day .dh .n{font-weight:800; font-size:1.1rem}
+  .meal{display:flex; gap:12px; align-items:center; width:100%; text-align:left; background:none; border:0;
+    padding:9px 6px; border-radius:10px; cursor:pointer; border-top:1px solid var(--line)}
+  .meal:first-of-type{border-top:0}
+  .meal:hover{background:var(--green-soft)}
+  .meal:focus-visible{outline:2px solid var(--green); outline-offset:1px}
+  .meal .em{font-size:1.7rem; line-height:1; width:34px; text-align:center; flex:0 0 auto}
+  .meal .body{flex:1; min-width:0}
+  .meal .time{font-size:.7rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--muted)}
+  .meal .name{font-weight:600; font-size:.95rem}
+  .meal.m1 .time{color:var(--b1)} .meal.m2 .time{color:var(--b2)}
+  .meal.m3 .time{color:var(--b3)} .meal.m4 .time{color:var(--b4)}
+  .meal .go{color:var(--line); font-size:1.1rem}
+  .meal:hover .go{color:var(--green)}
+  .between{margin-top:8px; padding-top:8px; border-top:1px dashed var(--line); font-size:.78rem; color:var(--muted)}
+
+  /* Grocery */
+  .grocery{margin-top:30px; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:18px 20px}
+  .grocery h3{margin:.1em 0 .2em; font-size:1.2rem}
+  .gtools{display:flex; gap:10px; flex-wrap:wrap; margin:6px 0 14px}
+  .gbtn{border:1px solid var(--line); background:var(--bg); color:var(--muted); padding:6px 12px; border-radius:999px; font-size:.8rem; cursor:pointer}
+  .gbtn:hover{border-color:var(--green); color:var(--green)}
+  .glist{list-style:none; margin:0; padding:0; columns:2; column-gap:26px}
+  @media(max-width:560px){.glist{columns:1}}
+  .glist li{break-inside:avoid; margin:0 0 6px}
+  .gitem{display:flex; gap:10px; align-items:flex-start; cursor:pointer; padding:5px 6px; border-radius:8px}
+  .gitem:hover{background:var(--green-soft)}
+  .gitem input{margin-top:3px; width:17px; height:17px; accent-color:var(--green); flex:0 0 auto}
+  .gitem .gx{font-size:1.05rem; flex:0 0 auto}
+  .gitem .gt{font-size:.92rem}
+  .gitem .gt small{color:var(--muted); display:block; font-size:.78rem}
+  .gitem.done .gt{text-decoration:line-through; color:var(--muted)}
+
+  /* Recipes */
+  .recipes{display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:18px}
+  .recipe{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow)}
+  .recipe .top{display:flex; gap:14px; align-items:center; padding:16px 18px; background:var(--green-soft)}
+  .recipe .top .big{font-size:2.4rem; line-height:1}
+  .recipe .top h3{margin:0; font-size:1.1rem}
+  .recipe .top .meta{font-size:.74rem; color:var(--green); font-weight:700; text-transform:uppercase; letter-spacing:.06em}
+  .recipe .in{padding:14px 18px 18px}
+  .recipe h4{margin:.6em 0 .3em; font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted)}
+  .recipe ul{margin:0; padding-left:18px; font-size:.9rem}
+  .recipe ol{margin:0; padding-left:20px; font-size:.9rem}
+  .recipe ol li{margin-bottom:5px}
+  .recipe .tag{display:inline-block; margin-top:10px; background:var(--accent-soft); color:#6b541b; font-size:.76rem; padding:4px 9px; border-radius:8px}
+  .recipe.flash{outline:3px solid var(--accent); outline-offset:2px}
+
+  /* Tips */
+  .tips{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px}
+  .tip{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:18px}
+  .tip h3{margin:.1em 0 .4em; font-size:1.05rem; display:flex; gap:8px; align-items:center}
+  .tip p{margin:0; color:var(--muted); font-size:.92rem}
+
+  .disclaimer{margin-top:30px; background:#fff; border:1px solid var(--line); border-left:5px solid var(--accent);
+    border-radius:12px; padding:16px 18px; font-size:.85rem; color:var(--muted)}
+  .disclaimer strong{color:var(--ink)}
+
+  footer{padding:26px 0; text-align:center; color:var(--muted); font-size:.82rem; border-top:1px solid var(--line)}
+
+  /* Print: show everything */
+  @media print{
+    nav.tabs,.printbtn,.gtools,.go,.between,.app-top .sub{display:none !important}
+    .panel{display:block !important; page-break-before:always}
+    .panel:first-of-type{page-break-before:avoid}
+    header.app{background:#fff; color:#000; border-bottom:2px solid #000}
+    header.app h1,header.app .eyebrow{color:#000}
+    body{background:#fff}
+    .day,.recipe,.note,.tip,.grocery{box-shadow:none; break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+
+<header class="app">
+  <div class="wrap app-top">
+    <div>
+      <div class="eyebrow">Simple whole-food eating</div>
+      <h1>28-Day Insulin-Reset Meal Plan</h1>
+      <p class="sub">Four meals a day at 8&nbsp;AM, 12&nbsp;PM, 4&nbsp;PM &amp; 8&nbsp;PM · bone broth every day · short Walmart grocery lists.</p>
+    </div>
+    <button class="printbtn" onclick="window.print()">Print / Save as PDF</button>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="wrap tabrow" id="tabrow">
+    <button class="tab active" data-tab="overview">Overview</button>
+    <button class="tab" data-tab="week1">Week 1</button>
+    <button class="tab" data-tab="week2">Week 2</button>
+    <button class="tab" data-tab="week3">Week 3</button>
+    <button class="tab" data-tab="week4">Week 4</button>
+    <button class="tab" data-tab="recipes">Recipes</button>
+    <button class="tab" data-tab="tips">Tips</button>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <!-- OVERVIEW -->
+  <section class="panel active" id="overview">
+    <div class="eyebrow">How this works</div>
+    <h2 class="sec">A simple, repeatable routine</h2>
+    <p class="lead">The plan reuses a small set of easy recipes so shopping stays cheap and cooking stays fast. Each week tab has that week's 7-day menu and its own grocery list. Tap any meal to jump to its recipe.</p>
+
+    <div class="eyebrow">Your daily rhythm</div>
+    <div class="rhythm">
+      <div class="slot s1"><div class="t">8:00 AM</div><div class="l">Breakfast</div></div>
+      <div class="slot s2"><div class="t">12:00 PM</div><div class="l">Lunch</div></div>
+      <div class="slot s3"><div class="t">4:00 PM</div><div class="l">Bone broth + snack</div></div>
+      <div class="slot s4"><div class="t">8:00 PM</div><div class="l">Dinner</div></div>
+    </div>
+
+    <div class="notes">
+      <div class="note"><h3>🍵 Bone broth daily</h3><p>One warm cup at 4&nbsp;PM, every day, paired with a small snack. Buy ready-made cartons at Walmart to keep it effortless.</p></div>
+      <div class="note"><h3>🥤 Drinks &amp; snacks between meals</h3><p>Water all day. Black coffee or green/herbal tea (no sugar) mid-morning. If hungry between meals: a few almonds, cucumber, or bell-pepper sticks.</p></div>
+      <div class="note amber"><h3>🫘 Beans &amp; lentils</h3><p>This plan uses <strong>canned</strong> beans &amp; lentils — just rinse before use. If you buy <strong>dried</strong> beans, soak them in water overnight the day before, then drain and throw away the soaking water before cooking. (Lentils need no soaking — just rinse.)</p></div>
+    </div>
+
+    <div class="disclaimer">
+      <strong>Please read:</strong> This is general wellness information, not medical advice. Insulin resistance and blood sugar are medical matters — talk with your doctor before starting, especially if you take medication for diabetes or blood pressure, since eating changes can lower your levels and your doses may need adjusting.
+    </div>
+  </section>
+
+  <!-- WEEK PANELS (filled by JS) -->
+  <section class="panel" id="week1"></section>
+  <section class="panel" id="week2"></section>
+  <section class="panel" id="week3"></section>
+  <section class="panel" id="week4"></section>
+
+  <!-- RECIPES (filled by JS) -->
+  <section class="panel" id="recipes">
+    <div class="eyebrow">Every recipe in the plan</div>
+    <h2 class="sec">Recipes &amp; instructions</h2>
+    <p class="lead">All amounts are one serving unless noted. Keep olive oil, salt, pepper and garlic on hand as staples.</p>
+    <div class="recipes" id="recipeGrid"></div>
+  </section>
+
+  <!-- TIPS -->
+  <section class="panel" id="tips">
+    <div class="eyebrow">Make it stick</div>
+    <h2 class="sec">Tips for reversing insulin resistance</h2>
+    <p class="lead">Diet does the heavy lifting, but these simple habits help your body respond to insulin better.</p>
+    <div class="tips">
+      <div class="tip"><h3>🍞 Cut the sugar &amp; white carbs</h3><p>The biggest lever. No soda, juice, candy, white bread, white rice or pastries. The meals here lean on protein, vegetables, beans and healthy fats instead.</p></div>
+      <div class="tip"><h3>🥗 Fill half the plate with veggies</h3><p>Non-starchy vegetables add fiber that slows sugar absorption. Greens, broccoli, peppers, zucchini, green beans and cauliflower all count.</p></div>
+      <div class="tip"><h3>🚶 Walk after meals</h3><p>A 10–15 minute walk after eating helps muscles pull sugar out of your blood. Easy and surprisingly effective.</p></div>
+      <div class="tip"><h3>💧 Drink water first</h3><p>Thirst can feel like hunger. Have a glass of water before snacking, and keep water with you through the day.</p></div>
+      <div class="tip"><h3>😴 Protect your sleep</h3><p>Short sleep worsens insulin resistance. Aim for 7–8 hours; keep a steady bedtime.</p></div>
+      <div class="tip"><h3>⏱️ Keep meal times steady</h3><p>Eating at the same four times daily steadies your blood sugar and curbs grazing. Try to finish dinner a few hours before bed.</p></div>
+    </div>
+    <div class="disclaimer">
+      <strong>One more time:</strong> This plan is educational only and not a substitute for care from your doctor or a registered dietitian. If you feel shaky, dizzy, or unwell after changing how you eat, check in with a medical professional.
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">28-Day Insulin-Reset Meal Plan · Built for one person · Adjust portions to your appetite and your doctor's guidance.</footer>
+
+<script>
+"use strict";
+
+/* ---------- safe storage (works on your server, no crash in sandbox) ---------- */
+const store = {
+  get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } },
+  set(k,v){ try { localStorage.setItem(k,v); } catch(e){} }
+};
+
+/* ---------- recipe bank ---------- */
+const R = {
+  /* Breakfasts */
+  B1:{name:"Spinach & Tomato Scramble",em:"🍳",time:"8 AM · Breakfast",
+    ing:["2 eggs","1 cup fresh spinach","½ tomato, chopped","1 tsp olive oil","½ avocado, sliced","Salt & pepper"],
+    steps:["Heat olive oil in a pan over medium.","Add spinach and tomato; cook 1–2 min until wilted.","Beat eggs, pour in, and scramble 2–3 min.","Season and serve with sliced avocado."]},
+  B2:{name:"Berry Yogurt Bowl",em:"🍓",time:"8 AM · Breakfast",
+    ing:["1 cup plain full-fat Greek yogurt","½ cup blueberries","1 tbsp chia seeds","5 walnuts, chopped"],
+    steps:["Spoon yogurt into a bowl.","Top with blueberries, chia seeds and walnuts.","Stir and eat."]},
+  B3:{name:"Boiled Eggs & Avocado",em:"🥑",time:"8 AM · Breakfast",
+    ing:["2 eggs","½ avocado","½ cucumber, sliced","Salt & pepper"],
+    steps:["Boil eggs 9 minutes, then cool and peel.","Slice avocado and cucumber.","Season everything and serve."]},
+  B4:{name:"Overnight Chia Pudding",em:"🥥",time:"8 AM · Breakfast",
+    ing:["3 tbsp chia seeds","1 cup unsweetened almond milk","½ cup blueberries","Pinch of cinnamon (optional)"],
+    steps:["The night before: stir chia seeds into almond milk in a jar, mix well, and refrigerate.","In the morning, stir again and top with blueberries."]},
+
+  /* Lunches */
+  L1:{name:"Chicken & Greens Salad",em:"🥗",time:"12 PM · Lunch",
+    ing:["1 chicken breast","2 cups mixed salad greens","½ cucumber, sliced","1 tbsp olive oil","Juice of ½ lemon","Salt & pepper"],
+    steps:["Season chicken and bake at 400°F for 20–25 min (or pan-cook), then slice.","Toss greens and cucumber with olive oil and lemon.","Top the salad with the sliced chicken."]},
+  L2:{name:"Black Bean Bowl",em:"🫘",time:"12 PM · Lunch",
+    ing:["1 cup black beans (canned, rinsed)","½ bell pepper, diced","¼ onion, diced","½ avocado","2 tbsp salsa"],
+    steps:["Warm the beans in a pan with pepper and onion for ~5 min.","Spoon into a bowl.","Top with avocado and salsa."],
+    note:"Using dried beans? Soak overnight the day before and discard the soaking water."},
+  L3:{name:"Tuna Salad over Greens",em:"🐟",time:"12 PM · Lunch",
+    ing:["1 can tuna in water, drained","1 tbsp olive oil","1 celery stick, diced","2 cups mixed salad greens","Salt & pepper"],
+    steps:["Mix tuna, olive oil, celery, salt and pepper.","Serve over a bed of greens."]},
+  L4:{name:"Easy Lentil Soup",em:"🍲",time:"12 PM · Lunch",
+    ing:["1 cup lentils (canned & rinsed, or dried)","1 carrot, diced","¼ onion, diced","1 garlic clove","3 cups bone broth or water","Salt & pepper"],
+    steps:["Rinse lentils well (no soaking needed).","Simmer lentils, carrot, onion and garlic in broth 25–30 min until soft.","Season to taste. Makes ~2 servings."]},
+
+  /* 4 PM bone broth + snack */
+  P1:{name:"Bone Broth + Almonds & Apple",em:"🍵",time:"4 PM · Bone broth + snack",
+    ing:["1 cup bone broth","10 almonds","½ apple, sliced"],
+    steps:["Warm the bone broth in a mug or pot.","Enjoy with almonds and apple slices on the side."]},
+  P2:{name:"Bone Broth + Peanut Butter Celery",em:"🥜",time:"4 PM · Bone broth + snack",
+    ing:["1 cup bone broth","2 celery sticks","1 tbsp natural peanut butter"],
+    steps:["Warm the bone broth.","Spread peanut butter on celery sticks and enjoy alongside."]},
+  P3:{name:"Bone Broth + Hummus & Cucumber",em:"🥒",time:"4 PM · Bone broth + snack",
+    ing:["1 cup bone broth","½ cucumber, sliced","2 tbsp hummus"],
+    steps:["Warm the bone broth.","Dip cucumber slices in hummus on the side."]},
+  P4:{name:"Bone Broth + Cottage Cheese",em:"🧀",time:"4 PM · Bone broth + snack",
+    ing:["1 cup bone broth","½ cup cottage cheese","Black pepper"],
+    steps:["Warm the bone broth.","Serve cottage cheese with a little pepper alongside."]},
+
+  /* Dinners */
+  D1:{name:"Baked Salmon & Broccoli",em:"🍣",time:"8 PM · Dinner",
+    ing:["1 salmon fillet","2 cups broccoli florets","1 tbsp olive oil","Juice of ½ lemon","Salt & pepper"],
+    steps:["Heat oven to 400°F.","Toss broccoli with ½ tbsp oil and salt on a tray.","Place salmon on the tray, drizzle with remaining oil, and season.","Bake 15–18 min; squeeze lemon over before serving."]},
+  D2:{name:"Turkey Zucchini Skillet",em:"🦃",time:"8 PM · Dinner",
+    ing:["½ lb ground turkey","1 zucchini, diced","½ can diced tomatoes","¼ onion, diced","1 tsp olive oil","Garlic, salt & pepper"],
+    steps:["Brown the turkey in olive oil for 5–6 min.","Add onion and zucchini; cook 5 min.","Stir in diced tomatoes; simmer 5 min and season."]},
+  D3:{name:"Baked Chicken Thighs & Green Beans",em:"🍗",time:"8 PM · Dinner",
+    ing:["2 chicken thighs","2 cups green beans","1 cup cauliflower florets","1 tbsp olive oil","Salt & pepper"],
+    steps:["Heat oven to 400°F.","Toss green beans and cauliflower with oil and salt on a tray.","Season chicken and add to the tray.","Bake 30–35 min until chicken is cooked through."]},
+  D4:{name:"Beef & Veggie Stir-Fry",em:"🥩",time:"8 PM · Dinner",
+    ing:["½ lb beef strips","2 cups frozen stir-fry vegetables","1 garlic clove, minced","1 tbsp olive oil","Salt & pepper (coconut aminos optional)"],
+    steps:["Heat oil and sear beef 3–4 min; remove from pan.","Stir-fry the vegetables with garlic for ~5 min.","Return beef, toss 1 min, and season."]},
+  D5:{name:"Bean & Turkey Chili",em:"🌶️",time:"8 PM · Dinner",
+    ing:["½ lb ground turkey","1 cup black or kidney beans (canned, rinsed)","½ can diced tomatoes","¼ onion, diced","1 tsp chili powder","1 tsp olive oil","Salt"],
+    steps:["Brown turkey and onion in olive oil.","Add beans, tomatoes and chili powder.","Simmer 15 min and season to taste."],
+    note:"Using dried beans? Soak overnight the day before and discard the soaking water."}
+};
+
+/* ---------- 28-day schedule: [breakfast, lunch, 4pm, dinner] ---------- */
+const WEEKS = [
+  { title:"Week 1 — Eggs, Chicken & Salmon",
+    intro:"Gentle start with simple egg breakfasts, chicken and bean lunches, and baked dinners.",
+    days:[
+      ["B1","L1","P1","D1"],["B2","L2","P1","D3"],["B1","L1","P1","D2"],
+      ["B2","L2","P1","D1"],["B1","L1","P1","D3"],["B2","L2","P1","D2"],["B1","L1","P1","D1"]
+    ],
+    grocery:[
+      ["🥚","Eggs","1 dozen"],["🥬","Fresh spinach","1 bag (5 oz)"],["🍅","Tomatoes","3"],
+      ["🥑","Avocados","4"],["🥛","Plain Greek yogurt (full-fat)","1 large tub"],["🫐","Blueberries","1 pack (or frozen)"],
+      ["🌱","Chia seeds","1 small bag"],["🌰","Walnuts","1 small bag"],["🍗","Chicken breast","4 (~1.5 lb)"],
+      ["🥬","Mixed salad greens","2 bags"],["🥒","Cucumbers","3"],["🍋","Lemons","2"],["🫒","Olive oil","1 bottle"],
+      ["🫘","Black beans (canned)","3 cans"],["🫑","Bell peppers","3"],["🧅","Onions","2"],["🥫","Salsa","1 jar"],
+      ["🍵","Bone broth","2–3 cartons (32 oz)"],["🥜","Almonds","1 bag"],["🍎","Apples","4"],["🍣","Salmon fillets","3"],
+      ["🥦","Broccoli","2 crowns (or 1 frozen bag)"],["🍗","Chicken thighs","4"],["🫛","Green beans","1 bag"],
+      ["🦃","Ground turkey","1 lb"],["🥒","Zucchini","3"],["🧂","Salt, pepper, garlic","if needed"]
+    ]
+  },
+  { title:"Week 2 — Tuna, Lentils, Turkey & Beef",
+    intro:"Pantry-friendly week: tuna and lentil lunches, plus turkey, beef and chili dinners.",
+    days:[
+      ["B3","L3","P2","D2"],["B4","L4","P2","D4"],["B3","L3","P2","D5"],
+      ["B4","L4","P2","D2"],["B3","L3","P2","D4"],["B4","L4","P2","D5"],["B3","L3","P2","D2"]
+    ],
+    grocery:[
+      ["🥚","Eggs","1 dozen"],["🥑","Avocados","4"],["🥒","Cucumbers","2"],["🌱","Chia seeds","1 small bag (if needed)"],
+      ["🥛","Unsweetened almond milk","1 carton"],["🫐","Blueberries","1 pack (or frozen)"],
+      ["🐟","Canned tuna (in water)","4 cans"],["🫒","Olive oil","1 bottle (if needed)"],["🥬","Celery","1 bunch"],
+      ["🥬","Mixed salad greens","2 bags"],["🫘","Lentils (canned or dried)","3 cans / 1 bag"],["🥕","Carrots","3"],
+      ["🧅","Onions","2"],["🧄","Garlic","1 bulb"],["🍵","Bone broth","3 cartons"],["🦃","Ground turkey","2.5 lb"],
+      ["🥒","Zucchini","2"],["🥫","Diced tomatoes (canned)","4 cans"],["🥩","Beef strips (stir-fry)","1 lb"],
+      ["🥦","Frozen stir-fry vegetables","2 bags"],["🫘","Black or kidney beans (canned)","2 cans"],
+      ["🌶️","Chili powder","1 small jar"],["🥜","Natural peanut butter","1 jar"],["🧂","Salt & pepper","if needed"]
+    ]
+  },
+  { title:"Week 3 — Eggs, Chicken, Salmon & Beef",
+    intro:"Back to fresh basics with chicken-and-bean lunches and a mix of baked and stir-fry dinners.",
+    days:[
+      ["B1","L1","P3","D1"],["B3","L2","P3","D3"],["B1","L1","P3","D4"],
+      ["B3","L2","P3","D1"],["B1","L1","P3","D3"],["B3","L2","P3","D4"],["B1","L1","P3","D1"]
+    ],
+    grocery:[
+      ["🥚","Eggs","1 dozen"],["🥬","Fresh spinach","1 bag"],["🍅","Tomatoes","3"],["🥑","Avocados","4"],
+      ["🥒","Cucumbers","3"],["🍗","Chicken breast","4"],["🥬","Mixed salad greens","2 bags"],["🍋","Lemons","2"],
+      ["🫒","Olive oil","1 bottle (if needed)"],["🫘","Black beans (canned)","3 cans"],["🫑","Bell peppers","3"],
+      ["🧅","Onions","2"],["🥫","Salsa","1 jar"],["🥣","Hummus","1 tub"],["🍵","Bone broth","2–3 cartons"],
+      ["🍣","Salmon fillets","3"],["🥦","Broccoli","2 crowns (or frozen)"],["🍗","Chicken thighs","2"],
+      ["🫛","Green beans","1 bag"],["🥬","Cauliflower","1 head (or frozen)"],["🥩","Beef strips (stir-fry)","1 lb"],
+      ["🥦","Frozen stir-fry vegetables","2 bags"],["🧄","Garlic","1 bulb"],["🧂","Salt & pepper","if needed"]
+    ]
+  },
+  { title:"Week 4 — Tuna, Beans, Chicken & Turkey",
+    intro:"Finish strong with yogurt and chia breakfasts, tuna/bean lunches, and family-style dinners.",
+    days:[
+      ["B2","L3","P4","D3"],["B4","L2","P4","D2"],["B2","L3","P4","D5"],
+      ["B4","L2","P4","D3"],["B2","L3","P4","D2"],["B4","L2","P4","D5"],["B2","L3","P4","D3"]
+    ],
+    grocery:[
+      ["🥛","Plain Greek yogurt (full-fat)","1 large tub"],["🫐","Blueberries","1–2 packs (or frozen)"],
+      ["🌱","Chia seeds","1 small bag (if needed)"],["🌰","Walnuts","1 small bag"],["🥛","Unsweetened almond milk","1 carton"],
+      ["🫘","Black beans (canned)","5 cans"],["🫑","Bell peppers","3"],["🧅","Onions","2"],["🥑","Avocados","3"],
+      ["🥫","Salsa","1 jar"],["🐟","Canned tuna (in water)","4 cans"],["🫒","Olive oil","1 bottle (if needed)"],
+      ["🥬","Celery","1 bunch"],["🥬","Mixed salad greens","2 bags"],["🧀","Cottage cheese","1 tub"],
+      ["🍵","Bone broth","2–3 cartons"],["🍗","Chicken thighs","4"],["🫛","Green beans","1 bag"],
+      ["🥬","Cauliflower","1 head (or frozen)"],["🦃","Ground turkey","2 lb"],["🥒","Zucchini","2"],
+      ["🥫","Diced tomatoes (canned)","3 cans"],["🌶️","Chili powder","1 small jar (if needed)"],["🧂","Salt & pepper","if needed"]
+    ]
+  }
+];
+
+const BETWEEN = "Between meals · water all day · black coffee or green/herbal tea (no sugar) · optional: a few almonds or veggie sticks";
+
+/* ---------- render ---------- */
+function mealRow(code, slotIdx){
+  const r = R[code];
+  return `<button class="meal m${slotIdx}" data-recipe="${code}">
+      <span class="em">${r.em}</span>
+      <span class="body"><span class="time">${r.time.split(" · ")[0]}</span><span class="name">${r.name}</span></span>
+      <span class="go">›</span>
+    </button>`;
+}
+
+function renderWeek(w, idx){
+  const panel = document.getElementById("week"+(idx+1));
+  let days = "";
+  w.days.forEach((codes, di) => {
+    const dayNum = idx*7 + di + 1;
+    days += `<div class="day">
+      <div class="dh"><span class="n">Day ${dayNum}</span><span class="eyebrow">${dayLabel(di)}</span></div>
+      ${mealRow(codes[0],1)}${mealRow(codes[1],2)}${mealRow(codes[2],3)}${mealRow(codes[3],4)}
+      <div class="between">${BETWEEN}</div>
+    </div>`;
+  });
+
+  let items = "";
+  w.grocery.forEach((g, gi) => {
+    items += `<li><label class="gitem" data-w="${idx}" data-i="${gi}">
+        <input type="checkbox">
+        <span class="gx">${g[0]}</span>
+        <span class="gt">${g[1]}<small>${g[2]}</small></span>
+      </label></li>`;
+  });
+
+  panel.innerHTML = `
+    <div class="eyebrow">7-day menu</div>
+    <h2 class="sec">${w.title}</h2>
+    <p class="lead">${w.intro}</p>
+    <div class="days">${days}</div>
+    <div class="grocery">
+      <h3>🛒 Week ${idx+1} grocery list</h3>
+      <p class="lead" style="margin:.2em 0 0">Simple staples for one person, all available at Walmart. Tap items as you shop.</p>
+      <div class="gtools">
+        <button class="gbtn" data-clear="${idx}">Clear all</button>
+      </div>
+      <ul class="glist">${items}</ul>
+    </div>`;
+
+  // restore checked state
+  applyChecks(idx);
+}
+
+function dayLabel(i){ return ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"][i]; }
+
+function renderRecipes(){
+  const grid = document.getElementById("recipeGrid");
+  const order = ["B1","B2","B3","B4","L1","L2","L3","L4","P1","P2","P3","P4","D1","D2","D3","D4","D5"];
+  grid.innerHTML = order.map(code => {
+    const r = R[code];
+    return `<article class="recipe" id="r-${code}">
+      <div class="top"><span class="big">${r.em}</span><div><div class="meta">${r.time}</div><h3>${r.name}</h3></div></div>
+      <div class="in">
+        <h4>Ingredients</h4>
+        <ul>${r.ing.map(i=>`<li>${i}</li>`).join("")}</ul>
+        <h4>Steps</h4>
+        <ol>${r.steps.map(s=>`<li>${s}</li>`).join("")}</ol>
+        ${r.note ? `<span class="tag">⚠️ ${r.note}</span>` : ""}
+      </div>
+    </article>`;
+  }).join("");
+}
+
+/* ---------- grocery checkbox state ---------- */
+function checkKey(w){ return "grx-w"+w; }
+function getChecked(w){
+  const raw = store.get(checkKey(w));
+  try { return raw ? JSON.parse(raw) : []; } catch(e){ return []; }
+}
+function applyChecks(w){
+  const checked = getChecked(w);
+  document.querySelectorAll(`.gitem[data-w="${w}"]`).forEach(el => {
+    const i = Number(el.dataset.i);
+    const on = checked.includes(i);
+    el.querySelector("input").checked = on;
+    el.classList.toggle("done", on);
+  });
+}
+function toggleCheck(el){
+  const w = Number(el.dataset.w), i = Number(el.dataset.i);
+  let checked = getChecked(w);
+  const input = el.querySelector("input");
+  if(input.checked){ if(!checked.includes(i)) checked.push(i); }
+  else { checked = checked.filter(x => x !== i); }
+  el.classList.toggle("done", input.checked);
+  store.set(checkKey(w), JSON.stringify(checked));
+}
+
+/* ---------- tabs ---------- */
+function switchTab(id){
+  document.querySelectorAll(".tab").forEach(t => t.classList.toggle("active", t.dataset.tab === id));
+  document.querySelectorAll(".panel").forEach(p => p.classList.toggle("active", p.id === id));
+  window.scrollTo({top:0, behavior:"instant" in window ? "instant" : "auto"});
+}
+
+function showRecipe(code){
+  switchTab("recipes");
+  const el = document.getElementById("r-"+code);
+  if(!el) return;
+  el.scrollIntoView({behavior:"smooth", block:"center"});
+  el.classList.add("flash");
+  setTimeout(()=>el.classList.remove("flash"), 1600);
+}
+
+/* ---------- init + events ---------- */
+WEEKS.forEach(renderWeek);
+renderRecipes();
+
+document.getElementById("tabrow").addEventListener("click", e => {
+  const t = e.target.closest(".tab");
+  if(t) switchTab(t.dataset.tab);
+});
+
+document.addEventListener("click", e => {
+  const meal = e.target.closest(".meal");
+  if(meal){ showRecipe(meal.dataset.recipe); return; }
+  const clear = e.target.closest("[data-clear]");
+  if(clear){
+    const w = Number(clear.dataset.clear);
+    store.set(checkKey(w), "[]");
+    applyChecks(w);
+    return;
+  }
+});
+
+document.addEventListener("change", e => {
+  const item = e.target.closest(".gitem");
+  if(item) toggleCheck(item);
+});
+</script>
+</body>
+</html>
