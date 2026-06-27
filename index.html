@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>28-Day Insulin-Reset Meal Plan</title>
+<title>28-Day Kerala Insulin-Reset Meal Plan</title>
 <style>
   :root{
     --bg:#f1f6ef; --surface:#ffffff; --ink:#13241b; --muted:#5b6b61;
     --green:#1f6b43; --green-deep:#13492c; --green-soft:#e7f1e8;
     --accent:#e6a92c; --accent-soft:#fbeed0; --line:#e0e8df;
-    --b1:#1f6b43; --b2:#2f7fb0; --b3:#c98a2b; --b4:#7a4fb0; /* meal time accents */
+    --b1:#1f6b43; --b2:#2f7fb0; --b3:#c98a2b; --b4:#7a4fb0;
     --radius:16px; --shadow:0 1px 2px rgba(20,40,28,.05),0 8px 24px rgba(20,40,28,.06);
     --max:1080px;
   }
@@ -23,18 +23,16 @@
   .wrap{max-width:var(--max); margin:0 auto; padding:0 18px}
   .eyebrow{font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--green); font-weight:700}
 
-  /* Header */
   header.app{background:var(--green-deep); color:#fff; padding:26px 0 22px}
   .app-top{display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap}
   header.app h1{margin:.15em 0 .1em; font-size:1.9rem; line-height:1.1; letter-spacing:-.02em}
-  header.app .sub{color:#cfe3d4; font-size:.95rem; max-width:46ch}
+  header.app .sub{color:#cfe3d4; font-size:.95rem; max-width:50ch}
   header.app .eyebrow{color:#9fd0ad}
   .printbtn{background:var(--accent); color:#3a2a05; border:0; padding:10px 16px; border-radius:999px;
     font-weight:700; font-size:.85rem; cursor:pointer; white-space:nowrap}
   .printbtn:hover{filter:brightness(1.05)}
   .printbtn:focus-visible{outline:3px solid #fff; outline-offset:2px}
 
-  /* Tabs */
   nav.tabs{position:sticky; top:0; z-index:20; background:var(--bg); border-bottom:1px solid var(--line)}
   .tabrow{display:flex; gap:8px; overflow-x:auto; padding:12px 0; scrollbar-width:none}
   .tabrow::-webkit-scrollbar{display:none}
@@ -50,9 +48,8 @@
   @keyframes fade{from{opacity:0; transform:translateY(6px)}to{opacity:1; transform:none}}
 
   h2.sec{font-size:1.5rem; letter-spacing:-.02em; margin:.2em 0 .1em}
-  .lead{color:var(--muted); max-width:62ch; margin:.2em 0 1.4em}
+  .lead{color:var(--muted); max-width:64ch; margin:.2em 0 1.4em}
 
-  /* Rhythm chips */
   .rhythm{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin:8px 0 22px}
   .slot{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:14px 16px;
     border-left:5px solid var(--green)}
@@ -61,7 +58,6 @@
   .slot.s1{border-left-color:var(--b1)} .slot.s2{border-left-color:var(--b2)}
   .slot.s3{border-left-color:var(--b3)} .slot.s4{border-left-color:var(--b4)}
 
-  /* Note cards */
   .notes{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; margin:6px 0 8px}
   .note{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:16px 18px}
   .note h3{margin:.1em 0 .35em; font-size:1.02rem; display:flex; gap:8px; align-items:center}
@@ -69,11 +65,15 @@
   .note.amber{background:var(--accent-soft); border-color:#f0dca6}
   .note.amber p{color:#6b541b}
 
-  /* Day grid */
   .days{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:16px; margin-top:6px}
   .day{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:16px 16px 12px; box-shadow:var(--shadow)}
   .day .dh{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:10px}
   .day .dh .n{font-weight:800; font-size:1.1rem}
+  .prep{display:flex; gap:8px; align-items:flex-start; background:var(--accent-soft); border:1px solid #f0dca6;
+    color:#6b541b; border-radius:10px; padding:8px 10px; margin-bottom:10px; font-size:.76rem; line-height:1.35}
+  .prep .pm{flex:0 0 auto; font-size:.95rem}
+  .prep b{font-weight:700}
+  .prep.clear{background:var(--green-soft); border-color:#cfe5d3; color:#2f6b46}
   .meal{display:flex; gap:12px; align-items:center; width:100%; text-align:left; background:none; border:0;
     padding:9px 6px; border-radius:10px; cursor:pointer; border-top:1px solid var(--line)}
   .meal:first-of-type{border-top:0}
@@ -89,7 +89,6 @@
   .meal:hover .go{color:var(--green)}
   .between{margin-top:8px; padding-top:8px; border-top:1px dashed var(--line); font-size:.78rem; color:var(--muted)}
 
-  /* Grocery */
   .grocery{margin-top:30px; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:18px 20px}
   .grocery h3{margin:.1em 0 .2em; font-size:1.2rem}
   .gtools{display:flex; gap:10px; flex-wrap:wrap; margin:6px 0 14px}
@@ -105,8 +104,10 @@
   .gitem .gt{font-size:.92rem}
   .gitem .gt small{color:var(--muted); display:block; font-size:.78rem}
   .gitem.done .gt{text-decoration:line-through; color:var(--muted)}
+  .pantry li{break-inside:avoid; margin:0 0 7px; font-size:.92rem; display:flex; gap:9px; align-items:flex-start}
+  .pantry .gx{font-size:1.05rem; flex:0 0 auto}
+  .foot{font-size:.82rem; color:var(--muted); margin-top:12px}
 
-  /* Recipes */
   .recipes{display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:18px}
   .recipe{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow)}
   .recipe .top{display:flex; gap:14px; align-items:center; padding:16px 18px; background:var(--green-soft)}
@@ -118,10 +119,9 @@
   .recipe ul{margin:0; padding-left:18px; font-size:.9rem}
   .recipe ol{margin:0; padding-left:20px; font-size:.9rem}
   .recipe ol li{margin-bottom:5px}
-  .recipe .tag{display:inline-block; margin-top:10px; background:var(--accent-soft); color:#6b541b; font-size:.76rem; padding:4px 9px; border-radius:8px}
+  .recipe .tag{display:inline-block; margin-top:10px; background:var(--accent-soft); color:#6b541b; font-size:.78rem; padding:5px 10px; border-radius:8px; line-height:1.4}
   .recipe.flash{outline:3px solid var(--accent); outline-offset:2px}
 
-  /* Tips */
   .tips{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px}
   .tip{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:18px}
   .tip h3{margin:.1em 0 .4em; font-size:1.05rem; display:flex; gap:8px; align-items:center}
@@ -133,7 +133,6 @@
 
   footer{padding:26px 0; text-align:center; color:var(--muted); font-size:.82rem; border-top:1px solid var(--line)}
 
-  /* Print: show everything */
   @media print{
     nav.tabs,.printbtn,.gtools,.go,.between,.app-top .sub{display:none !important}
     .panel{display:block !important; opacity:1 !important; animation:none !important; page-break-before:always}
@@ -150,9 +149,9 @@
 <header class="app">
   <div class="wrap app-top">
     <div>
-      <div class="eyebrow">Simple whole-food eating</div>
-      <h1>28-Day Insulin-Reset Meal Plan</h1>
-      <p class="sub">Four meals a day at 8&nbsp;AM, 12&nbsp;PM, 4&nbsp;PM &amp; 8&nbsp;PM · bone broth every day · short Walmart grocery lists.</p>
+      <div class="eyebrow">Simple Kerala whole-food eating</div>
+      <h1>28-Day Kerala Insulin-Reset Plan</h1>
+      <p class="sub">Four meals a day at 8&nbsp;AM, 12&nbsp;PM, 4&nbsp;PM &amp; 8&nbsp;PM · bone broth daily · millet-based &amp; low-GI · Indian-grocery friendly.</p>
     </div>
     <button class="printbtn" onclick="window.print()">Print / Save as PDF</button>
   </div>
@@ -175,8 +174,8 @@
   <!-- OVERVIEW -->
   <section class="panel active" id="overview">
     <div class="eyebrow">How this works</div>
-    <h2 class="sec">A simple, repeatable routine</h2>
-    <p class="lead">The plan reuses a small set of easy recipes so shopping stays cheap and cooking stays fast. Each week tab has that week's 7-day menu and its own grocery list. Tap any meal to jump to its recipe.</p>
+    <h2 class="sec">Kerala flavors, blood-sugar friendly</h2>
+    <p class="lead">This plan brings Kerala cooking — coconut, curry leaves, coconut oil and shallots — to a low-GI table. Every base is a millet (foxtail, little or ragi), a moong/lentil dosa or idli, or cauliflower rice, with plenty of dal and vegetables. Each week tab has that week's 7-day menu and a short grocery list. Buy the pantry &amp; spices once; they last the month. Tap any meal to see its recipe.</p>
 
     <div class="eyebrow">Your daily rhythm</div>
     <div class="rhythm">
@@ -187,9 +186,38 @@
     </div>
 
     <div class="notes">
-      <div class="note"><h3>🍵 Bone broth daily</h3><p>One warm cup at 4&nbsp;PM, every day, paired with a small snack. Buy ready-made cartons at Walmart to keep it effortless.</p></div>
-      <div class="note"><h3>🥤 Drinks &amp; snacks between meals</h3><p>Water all day. Black coffee or green/herbal tea (no sugar) mid-morning. If hungry between meals: a few almonds, cucumber, or bell-pepper sticks.</p></div>
-      <div class="note amber"><h3>🫘 Beans &amp; lentils</h3><p>This plan uses <strong>canned</strong> beans &amp; lentils — just rinse before use. If you buy <strong>dried</strong> beans, soak them in water overnight the day before, then drain and throw away the soaking water before cooking. (Lentils need no soaking — just rinse.)</p></div>
+      <div class="note"><h3>🍵 Bone broth daily</h3><p>One warm cup at 4&nbsp;PM every day with a small snack. Want it fully Kerala? Swap in <strong>rasam</strong> (peppery tamarind broth) on any day.</p></div>
+      <div class="note"><h3>🌾 Millet bases</h3><p>Every base is a millet (foxtail, little, ragi), a moong/lentil dosa &amp; idli, or cauliflower rice. Millets digest slowly and keep blood sugar steady.</p></div>
+      <div class="note"><h3>🥥 Kerala on the plate</h3><p>Coconut, coconut oil, curry leaves and shallots run through the menu — avial, thoran, olan, kadala curry, and Kerala-style fish &amp; chicken curry.</p></div>
+      <div class="note amber"><h3>🫘 Beans, lentils &amp; dals</h3><p>Lentils and dals just need rinsing (soak 1–2&nbsp;hrs only for grinding dosa). Dried <strong>kadala</strong> (black chickpeas), cowpeas or other beans: soak overnight the day before, then drain and throw away the soaking water. Canned: just rinse.</p></div>
+      <div class="note"><h3>🥤 Drinks &amp; snacks between meals</h3><p>Water all day. Plain coffee/tea or Kerala <strong>sambaram</strong> (spiced buttermilk, no sugar). If hungry between meals: cucumber or roasted chana.</p></div>
+    </div>
+
+    <div class="grocery">
+      <h3>🧂 Pantry &amp; spices — buy once</h3>
+      <p class="lead" style="margin:.2em 0 14px">These last the whole month. Stock them first and the weekly lists stay short.</p>
+      <ul class="glist pantry">
+        <li><span class="gx">🟡</span> Turmeric powder</li>
+        <li><span class="gx">🌶️</span> Red chili powder</li>
+        <li><span class="gx">🟤</span> Coriander powder</li>
+        <li><span class="gx">⚫</span> Mustard seeds</li>
+        <li><span class="gx">🥄</span> Cumin seeds</li>
+        <li><span class="gx">🌿</span> Fennel seeds</li>
+        <li><span class="gx">🫑</span> Black pepper (the Kerala spice)</li>
+        <li><span class="gx">🍛</span> Sambar powder &amp; garam masala</li>
+        <li><span class="gx">🍃</span> Curry leaves</li>
+        <li><span class="gx">🌶️</span> Dried red chilies &amp; green chilies</li>
+        <li><span class="gx">🥥</span> Coconut oil (the Kerala fat)</li>
+        <li><span class="gx">🥥</span> Shredded coconut (or frozen grated — see weekly)</li>
+        <li><span class="gx">🥫</span> Coconut milk (canned)</li>
+        <li><span class="gx">🟫</span> Tamarind paste</li>
+        <li><span class="gx">🟤</span> Kudampuli / kokum (optional, fish curry)</li>
+        <li><span class="gx">🧄</span> Garlic &amp; <span class="gx">🫚</span> ginger</li>
+        <li><span class="gx">🛢️</span> Cooking oil &amp; <span class="gx">🧂</span> salt</li>
+        <li><span class="gx">🫘</span> Chana &amp; urad dal (tempering / batter, optional)</li>
+        <li><span class="gx">✨</span> Fruit salt / Eno (optional, for ragi idli)</li>
+      </ul>
+      <p class="foot">All at any Indian grocery store. Coconut oil and fresh curry leaves are worth keeping on hand — Kerala cooking leans on both. Buy once; they last the month.</p>
     </div>
 
     <div class="disclaimer">
@@ -197,32 +225,29 @@
     </div>
   </section>
 
-  <!-- WEEK PANELS (filled by JS) -->
   <section class="panel" id="week1"></section>
   <section class="panel" id="week2"></section>
   <section class="panel" id="week3"></section>
   <section class="panel" id="week4"></section>
 
-  <!-- RECIPES (filled by JS) -->
   <section class="panel" id="recipes">
     <div class="eyebrow">Every recipe in the plan</div>
     <h2 class="sec">Recipes &amp; instructions</h2>
-    <p class="lead">All amounts are one serving unless noted. Keep olive oil, salt, pepper and garlic on hand as staples.</p>
+    <p class="lead">Amounts are 1–2 servings as noted. Keep the pantry &amp; spices (Overview) on hand, and cook with coconut oil for the Kerala aroma. A standard tempering = heat coconut oil, pop mustard seeds, then add curry leaves and a dried chili.</p>
     <div class="recipes" id="recipeGrid"></div>
   </section>
 
-  <!-- TIPS -->
   <section class="panel" id="tips">
     <div class="eyebrow">Make it stick</div>
     <h2 class="sec">Tips for reversing insulin resistance</h2>
     <p class="lead">Diet does the heavy lifting, but these simple habits help your body respond to insulin better.</p>
     <div class="tips">
-      <div class="tip"><h3>🍞 Cut the sugar &amp; white carbs</h3><p>The biggest lever. No soda, juice, candy, white bread, white rice or pastries. The meals here lean on protein, vegetables, beans and healthy fats instead.</p></div>
-      <div class="tip"><h3>🥗 Fill half the plate with veggies</h3><p>Non-starchy vegetables add fiber that slows sugar absorption. Greens, broccoli, peppers, zucchini, green beans and cauliflower all count.</p></div>
+      <div class="tip"><h3>🌾 Build on millets</h3><p>Build meals on millets (foxtail, little, ragi), moong/lentil dosa &amp; idli, or cauliflower rice — they digest slowly and keep blood sugar steady. Pair with dal, veg and curd.</p></div>
+      <div class="tip"><h3>🥗 Half the plate veggies</h3><p>Thoran, avial, sambar and salads add fiber that slows sugar absorption. Load up on beans, cabbage, carrots, spinach and gourds.</p></div>
       <div class="tip"><h3>🚶 Walk after meals</h3><p>A 10–15 minute walk after eating helps muscles pull sugar out of your blood. Easy and surprisingly effective.</p></div>
-      <div class="tip"><h3>💧 Drink water first</h3><p>Thirst can feel like hunger. Have a glass of water before snacking, and keep water with you through the day.</p></div>
-      <div class="tip"><h3>😴 Protect your sleep</h3><p>Short sleep worsens insulin resistance. Aim for 7–8 hours; keep a steady bedtime.</p></div>
-      <div class="tip"><h3>⏱️ Keep meal times steady</h3><p>Eating at the same four times daily steadies your blood sugar and curbs grazing. Try to finish dinner a few hours before bed.</p></div>
+      <div class="tip"><h3>🥥 Coconut &amp; protein in moderation</h3><p>Coconut, fish, chicken, paneer/tofu and dal keep you full and steady. Use coconut oil for flavor, but keep the quantity modest.</p></div>
+      <div class="tip"><h3>💧 Drink water first</h3><p>Thirst can feel like hunger. Have water or unsweetened sambaram before snacking, and keep water with you all day.</p></div>
+      <div class="tip"><h3>⏱️ Keep meal times steady</h3><p>Eating at the same four times daily steadies blood sugar and curbs grazing. Try to finish dinner a few hours before bed.</p></div>
     </div>
     <div class="disclaimer">
       <strong>One more time:</strong> This plan is educational only and not a substitute for care from your doctor or a registered dietitian. If you feel shaky, dizzy, or unwell after changing how you eat, check in with a medical professional.
@@ -231,153 +256,181 @@
 
 </main>
 
-<footer class="wrap">28-Day Insulin-Reset Meal Plan · Built for one person · Adjust portions to your appetite and your doctor's guidance.</footer>
+<footer class="wrap">28-Day Kerala Insulin-Reset Plan · Built for one person · Adjust portions to your appetite and your doctor's guidance.</footer>
 
 <script>
 "use strict";
 
-/* ---------- safe storage (works on your server, no crash in sandbox) ---------- */
 const store = {
   get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } },
   set(k,v){ try { localStorage.setItem(k,v); } catch(e){} }
 };
 
-/* ---------- recipe bank ---------- */
+/* ---------- recipe bank (Kerala, millet-based, low-GI) ---------- */
 const R = {
   /* Breakfasts */
-  B1:{name:"Spinach & Tomato Scramble",em:"🍳",time:"8 AM · Breakfast",
-    ing:["2 eggs","1 cup fresh spinach","½ tomato, chopped","1 tsp olive oil","½ avocado, sliced","Salt & pepper"],
-    steps:["Heat olive oil in a pan over medium.","Add spinach and tomato; cook 1–2 min until wilted.","Beat eggs, pour in, and scramble 2–3 min.","Season and serve with sliced avocado."]},
-  B2:{name:"Berry Yogurt Bowl",em:"🍓",time:"8 AM · Breakfast",
-    ing:["1 cup plain full-fat Greek yogurt","½ cup blueberries","1 tbsp chia seeds","5 walnuts, chopped"],
-    steps:["Spoon yogurt into a bowl.","Top with blueberries, chia seeds and walnuts.","Stir and eat."]},
-  B3:{name:"Boiled Eggs & Avocado",em:"🥑",time:"8 AM · Breakfast",
-    ing:["2 eggs","½ avocado","½ cucumber, sliced","Salt & pepper"],
-    steps:["Boil eggs 9 minutes, then cool and peel.","Slice avocado and cucumber.","Season everything and serve."]},
-  B4:{name:"Overnight Chia Pudding",em:"🥥",time:"8 AM · Breakfast",
-    ing:["3 tbsp chia seeds","1 cup unsweetened almond milk","½ cup blueberries","Pinch of cinnamon (optional)"],
-    steps:["The night before: stir chia seeds into almond milk in a jar, mix well, and refrigerate.","In the morning, stir again and top with blueberries."]},
+  KB1:{name:"Ragi Dosa",em:"🫓",time:"8 AM · Breakfast",
+    ing:["1 cup ragi (finger millet) flour","½ cup buttermilk or thin yogurt","¼ onion, finely chopped","1 green chili","Few curry leaves","½ tsp cumin","Salt","Coconut oil","Coconut chutney, to serve"],
+    steps:["Mix ragi flour, buttermilk, salt and enough water into a thin, pourable batter; rest 10 min.","Stir in onion, green chili, curry leaves and cumin.","Pour onto a hot pan and spread thin; drizzle coconut oil; cook 2–3 min until the edges crisp, then flip 1 min.","Serve with coconut chutney."],
+    note:"Ragi (finger millet) is low-GI and rich in fiber and calcium."},
+  KB2:{name:"Ragi Idli + Kadala Curry",em:"🍥",time:"8 AM · Breakfast",
+    ing:["1 cup ragi flour","½ cup plain yogurt","¼ cup water","½ tsp fruit salt (eno) or a pinch of baking soda","Salt","1 tsp coconut oil (to grease)","Kadala curry (see recipe), to serve"],
+    steps:["Mix ragi flour, yogurt, salt and water into a thick idli batter; rest 10 min.","Just before steaming, stir in the fruit salt.","Pour into greased idli moulds and steam 10–12 min until set.","Serve hot with kadala curry."],
+    prep:"soak black chickpeas (kadala)",
+    note:"Steam in any idli mould or small steamer. The black chickpea (kadala) curry adds protein."},
+  KB3:{name:"Foxtail Millet Upma",em:"🥣",time:"8 AM · Breakfast",
+    ing:["1 cup foxtail (or little) millet, rinsed","½ tsp mustard seeds","Few curry leaves","1 green chili","Small piece ginger","¼ onion","¼ cup mixed veg (carrot, beans, peas)","2 tbsp grated coconut","1 tsp coconut oil","2 cups water","Salt"],
+    steps:["Heat coconut oil, pop mustard seeds, add curry leaves, chili, ginger and onion; sauté 2 min.","Add veg, cook 3 min, then add water and salt and bring to a boil.","Stir in the millet, cover and cook on low 10–12 min until fluffy.","Fold in grated coconut and serve."]},
+  KB4:{name:"Pesarattu (Moong Dosa)",em:"🫓",time:"8 AM · Breakfast",
+    ing:["1 cup whole green moong (soaked 4 hrs / overnight)","1 green chili","Small piece ginger","¼ onion, chopped","Few curry leaves","Salt","Coconut oil","Coconut chutney, to serve"],
+    steps:["Drain the soaked moong; blend with green chili, ginger and a little water into a pourable batter; add salt.","Heat a pan, pour a ladle, spread thin; scatter onion and curry leaves on top.","Drizzle coconut oil; cook 2–3 min until crisp, then flip 1 min.","Serve with coconut chutney."],
+    prep:"soak whole green moong",
+    note:"Soak the moong the day before — just drain and rinse."},
 
   /* Lunches */
-  L1:{name:"Chicken & Greens Salad",em:"🥗",time:"12 PM · Lunch",
-    ing:["1 chicken breast","2 cups mixed salad greens","½ cucumber, sliced","1 tbsp olive oil","Juice of ½ lemon","Salt & pepper"],
-    steps:["Season chicken and bake at 400°F for 20–25 min (or pan-cook), then slice.","Toss greens and cucumber with olive oil and lemon.","Top the salad with the sliced chicken."]},
-  L2:{name:"Black Bean Bowl",em:"🫘",time:"12 PM · Lunch",
-    ing:["1 cup black beans (canned, rinsed)","½ bell pepper, diced","¼ onion, diced","½ avocado","2 tbsp salsa"],
-    steps:["Warm the beans in a pan with pepper and onion for ~5 min.","Spoon into a bowl.","Top with avocado and salsa."],
-    note:"Using dried beans? Soak overnight the day before and discard the soaking water."},
-  L3:{name:"Tuna Salad over Greens",em:"🐟",time:"12 PM · Lunch",
-    ing:["1 can tuna in water, drained","1 tbsp olive oil","1 celery stick, diced","2 cups mixed salad greens","Salt & pepper"],
-    steps:["Mix tuna, olive oil, celery, salt and pepper.","Serve over a bed of greens."]},
-  L4:{name:"Easy Lentil Soup",em:"🍲",time:"12 PM · Lunch",
-    ing:["1 cup lentils (canned & rinsed, or dried)","1 carrot, diced","¼ onion, diced","1 garlic clove","3 cups bone broth or water","Salt & pepper"],
-    steps:["Rinse lentils well (no soaking needed).","Simmer lentils, carrot, onion and garlic in broth 25–30 min until soft.","Season to taste. Makes ~2 servings."]},
+  KL1:{name:"Kerala Sambar, Cabbage Thoran & Millet",em:"🍛",time:"12 PM · Lunch",
+    ing:["1 cup Kerala sambar (see recipe)","Cabbage thoran (2 cups shredded cabbage + 3 tbsp grated coconut + green chili)","½ cup cooked foxtail or little millet","½ cup plain yogurt (curd)"],
+    steps:["Make sambar (recipe card).","Thoran: temper mustard seeds and green chili in coconut oil, add cabbage, cook 5–6 min, then fold in grated coconut and salt.","Serve sambar over a small portion of millet with cabbage thoran and a side of curd."],
+    note:"Keep the millet portion small. Thoran (coconut-laced veg) is a Kerala staple side."},
+  KL2:{name:"Cherupayar (Green Gram) Curry & Millet",em:"🫘",time:"12 PM · Lunch",
+    ing:["1 cup whole green moong (cherupayar), soaked & cooked","½ cup grated coconut","2 cloves garlic","½ tsp cumin","¼ tsp turmeric","4 shallots or ½ onion","½ tsp mustard seeds","Few curry leaves","1 tsp coconut oil","Salt","½ cup cooked foxtail or little millet, to serve"],
+    steps:["Cook the soaked green moong with turmeric and salt until soft.","Coarsely grind the coconut with cumin and garlic; stir into the moong and simmer 5 min.","Temper mustard seeds, curry leaves and shallots in coconut oil; pour over. Serve with millet."],
+    prep:"soak whole green moong",
+    note:"Soak the green moong the day before. Whole green gram is high in protein and fiber."},
+  KL3:{name:"Curd Millet",em:"🍚",time:"12 PM · Lunch",
+    ing:["½ cup cooked foxtail or little millet, cooled","¾ cup plain yogurt","2 tbsp milk or water","½ tsp mustard seeds","1 dried red chili","Few curry leaves","Small piece ginger, grated","¼ carrot, grated","¼ cucumber, chopped","1 tsp coconut oil","Salt"],
+    steps:["Lightly mash the cooled millet; mix in yogurt, milk and salt to a creamy texture.","Temper mustard seeds, red chili, ginger and curry leaves in coconut oil; pour over.","Fold in carrot and cucumber. Serve cool."],
+    prep:"cook the millet ahead so it can cool",
+    note:"A cooling, probiotic-rich lunch — millet keeps it gentle on blood sugar."},
+  KL4:{name:"Olan (Ash Gourd & Cowpea) & Millet",em:"🍲",time:"12 PM · Lunch",
+    ing:["1 cup ash gourd (or zucchini), cubed","½ cup cowpeas (van payar / black-eyed peas), soaked & cooked","1 cup coconut milk","1–2 green chilies","Few curry leaves","1 tsp coconut oil","Salt","½ cup cooked foxtail or little millet, to serve"],
+    steps:["Cook the ash gourd with green chilies, salt and a little water until tender.","Add the cooked cowpeas and coconut milk; simmer gently 5 min (don't boil hard).","Finish with curry leaves and a drizzle of raw coconut oil. Serve with millet."],
+    prep:"soak cowpeas",
+    note:"Soak the cowpeas the day before and discard the soaking water. Olan is a light, soothing Kerala classic."},
 
   /* 4 PM bone broth + snack */
-  P1:{name:"Bone Broth + Almonds & Apple",em:"🍵",time:"4 PM · Bone broth + snack",
-    ing:["1 cup bone broth","10 almonds","½ apple, sliced"],
-    steps:["Warm the bone broth in a mug or pot.","Enjoy with almonds and apple slices on the side."]},
-  P2:{name:"Bone Broth + Peanut Butter Celery",em:"🥜",time:"4 PM · Bone broth + snack",
-    ing:["1 cup bone broth","2 celery sticks","1 tbsp natural peanut butter"],
-    steps:["Warm the bone broth.","Spread peanut butter on celery sticks and enjoy alongside."]},
-  P3:{name:"Bone Broth + Hummus & Cucumber",em:"🥒",time:"4 PM · Bone broth + snack",
-    ing:["1 cup bone broth","½ cucumber, sliced","2 tbsp hummus"],
-    steps:["Warm the bone broth.","Dip cucumber slices in hummus on the side."]},
-  P4:{name:"Bone Broth + Cottage Cheese",em:"🧀",time:"4 PM · Bone broth + snack",
-    ing:["1 cup bone broth","½ cup cottage cheese","Black pepper"],
-    steps:["Warm the bone broth.","Serve cottage cheese with a little pepper alongside."]},
+  KP1:{name:"Bone Broth + Kadala Sundal",em:"🧆",time:"4 PM · Bone broth + snack",
+    ing:["1 cup bone broth","1 cup chickpeas (canned, rinsed)","½ tsp mustard seeds","Few curry leaves","1 dried red chili","2 tbsp grated coconut","1 tsp coconut oil","Squeeze of lemon","Salt"],
+    steps:["Warm the bone broth.","Temper mustard seeds, red chili and curry leaves in coconut oil; add chickpeas and coconut and toss 2 min with salt.","Finish with lemon and enjoy with the broth."],
+    note:"Dried chickpeas need overnight soaking (discard the water); canned just need rinsing."},
+  KP2:{name:"Bone Broth + Kosambari",em:"🥗",time:"4 PM · Bone broth + snack",
+    ing:["1 cup bone broth","¼ cup split moong dal (soaked 1–2 hrs)","½ cucumber, chopped","¼ carrot, grated","2 tbsp grated coconut","Lemon","Salt"],
+    steps:["Warm the bone broth.","Drain the soaked moong dal; mix with cucumber, carrot, coconut, salt and lemon.","Serve the fresh salad with the broth."],
+    prep:"soak split moong dal"},
+  KP3:{name:"Bone Broth + Sambaram",em:"🥛",time:"4 PM · Bone broth + snack",
+    ing:["1 cup bone broth","1 cup buttermilk (or ½ cup yogurt + ½ cup water)","Small piece ginger, grated","1 green chili, minced","Few curry leaves & coriander","Pinch salt","½ cucumber, sliced"],
+    steps:["Warm the bone broth.","Whisk the buttermilk with ginger, green chili, curry leaves, coriander and salt — this is Kerala sambaram.","Sip alongside the broth with cucumber on the side."]},
+  KP4:{name:"Bone Broth + Roasted Chana & Cucumber",em:"🫘",time:"4 PM · Bone broth + snack",
+    ing:["1 cup bone broth","¼ cup roasted chana (dalia / putani)","½ cucumber, sliced","Pinch chili powder + salt"],
+    steps:["Warm the bone broth.","Toss the roasted chana with a pinch of chili powder and salt.","Enjoy with cucumber slices on the side."],
+    note:"Roasted chana is a crunchy, protein-rich snack."},
 
   /* Dinners */
-  D1:{name:"Baked Salmon & Broccoli",em:"🍣",time:"8 PM · Dinner",
-    ing:["1 salmon fillet","2 cups broccoli florets","1 tbsp olive oil","Juice of ½ lemon","Salt & pepper"],
-    steps:["Heat oven to 400°F.","Toss broccoli with ½ tbsp oil and salt on a tray.","Place salmon on the tray, drizzle with remaining oil, and season.","Bake 15–18 min; squeeze lemon over before serving."]},
-  D2:{name:"Turkey Zucchini Skillet",em:"🦃",time:"8 PM · Dinner",
-    ing:["½ lb ground turkey","1 zucchini, diced","½ can diced tomatoes","¼ onion, diced","1 tsp olive oil","Garlic, salt & pepper"],
-    steps:["Brown the turkey in olive oil for 5–6 min.","Add onion and zucchini; cook 5 min.","Stir in diced tomatoes; simmer 5 min and season."]},
-  D3:{name:"Baked Chicken Thighs & Green Beans",em:"🍗",time:"8 PM · Dinner",
-    ing:["2 chicken thighs","2 cups green beans","1 cup cauliflower florets","1 tbsp olive oil","Salt & pepper"],
-    steps:["Heat oven to 400°F.","Toss green beans and cauliflower with oil and salt on a tray.","Season chicken and add to the tray.","Bake 30–35 min until chicken is cooked through."]},
-  D4:{name:"Beef & Veggie Stir-Fry",em:"🥩",time:"8 PM · Dinner",
-    ing:["½ lb beef strips","2 cups frozen stir-fry vegetables","1 garlic clove, minced","1 tbsp olive oil","Salt & pepper (coconut aminos optional)"],
-    steps:["Heat oil and sear beef 3–4 min; remove from pan.","Stir-fry the vegetables with garlic for ~5 min.","Return beef, toss 1 min, and season."]},
-  D5:{name:"Bean & Turkey Chili",em:"🌶️",time:"8 PM · Dinner",
-    ing:["½ lb ground turkey","1 cup black or kidney beans (canned, rinsed)","½ can diced tomatoes","¼ onion, diced","1 tsp chili powder","1 tsp olive oil","Salt"],
-    steps:["Brown turkey and onion in olive oil.","Add beans, tomatoes and chili powder.","Simmer 15 min and season to taste."],
-    note:"Using dried beans? Soak overnight the day before and discard the soaking water."}
+  KD1:{name:"Ragi/Moong Dosa + Sambar + Chutney",em:"🫓",time:"8 PM · Dinner",
+    ing:["Ragi dosa or moong dosa batter (see KB1 / KB4)","1 cup Kerala sambar (see recipe)","Coconut chutney","Coconut oil"],
+    steps:["Make thin dosas on a hot pan with a little coconut oil.","Warm the sambar.","Serve the dosas with sambar and coconut chutney."],
+    note:"A light, balanced dinner — millet/moong keeps it low-GI. Ragi dosa needs no soaking; for moong dosa, soak the moong the night before."},
+  KD2:{name:"Nadan Kerala Chicken Curry + Cabbage Thoran",em:"🍗",time:"8 PM · Dinner",
+    ing:["½ lb chicken pieces","5 shallots or ½ onion","1 tomato","1 tsp ginger-garlic, minced","1 tsp coriander powder","½ tsp chili powder, ¼ tsp turmeric","¼ tsp fennel + ¼ tsp black pepper","¼ cup coconut milk","½ tsp mustard seeds, few curry leaves","1 tbsp coconut oil, salt","Thoran: 2 cups shredded cabbage + 3 tbsp grated coconut"],
+    steps:["Heat coconut oil, temper mustard seeds and curry leaves; add shallots and ginger-garlic and cook till golden.","Add tomato and all the spices; cook to a thick masala. Add chicken and ½ cup water; simmer covered 18–20 min.","Stir in coconut milk, simmer 3 min, and season.","Thoran: cook cabbage with a little coconut oil 5–6 min, then fold in coconut and salt. Serve together."],
+    note:"Kerala \"nadan\" style — coconut oil, shallots, fennel and pepper give the signature flavor."},
+  KD3:{name:"Kerala Avial + Millet",em:"🥘",time:"8 PM · Dinner",
+    ing:["3 cups mixed vegetables in batons (carrot, green beans, zucchini, raw banana if available)","½ cup grated coconut","1 tsp cumin","2 green chilies","¼ cup plain yogurt or thin buttermilk","Few curry leaves","1 tbsp coconut oil","¼ tsp turmeric","Salt","½ cup cooked foxtail or little millet, to serve"],
+    steps:["Cook the vegetables with turmeric, salt and a little water until just tender.","Coarsely grind the coconut with cumin and green chilies; stir in and cook 2 min.","Lower the heat, fold in yogurt/buttermilk and curry leaves; warm through (don't boil).","Finish with raw coconut oil. Serve with millet."],
+    note:"Avial — the iconic Kerala mixed-vegetable dish — is naturally low-GI and packed with veg."},
+  KD4:{name:"Kerala Fish Curry (Meen Curry) + Steamed Greens",em:"🐟",time:"8 PM · Dinner",
+    ing:["¾ lb white fish fillets (tilapia/cod)","5 shallots or ½ onion","1 tsp ginger-garlic","1 tsp coriander powder","½ tsp chili powder, ¼ tsp turmeric","2 pieces kudampuli (or 1 tsp tamarind paste)","¼ cup coconut milk (optional)","½ tsp mustard seeds, few curry leaves","1 tbsp coconut oil, salt","Side: 4 cups spinach, steamed"],
+    steps:["Soak the kudampuli in warm water 10 min.","Heat coconut oil, temper mustard seeds and curry leaves; add shallots and ginger-garlic and cook soft.","Add the spices and 1 cup water with the kudampuli; simmer 5 min.","Add the fish (and coconut milk if using); simmer gently 8–10 min until cooked. Steam the spinach and serve alongside."],
+    note:"Kudampuli (Malabar tamarind) gives the authentic tang — regular tamarind works too. Coconut milk makes it milder."},
+  KD5:{name:"Kerala Vegetable Ishtu with Tofu",em:"🍲",time:"8 PM · Dinner",
+    ing:["1 block tofu (or paneer), cubed","2 cups mixed veg (carrot, beans, cauliflower, peas)","5 shallots or ½ onion","Small piece ginger","1–2 green chilies","¾ cup coconut milk","¼ tsp black pepper","Few curry leaves","1 tbsp coconut oil","Salt"],
+    steps:["Lightly pan-sear the tofu/paneer in coconut oil; set aside.","In the same pan, sauté shallots, ginger and green chilies 2 min; add the vegetables and ½ cup water and cook 6 min.","Add coconut milk, pepper, curry leaves and the tofu/paneer; simmer gently 4 min (don't boil hard) and season."],
+    note:"Ishtu (Kerala stew) is mild and coconut-rich — lovely with a small millet or on its own."},
+
+  /* Base recipes */
+  CHUT:{name:"Coconut Chutney",em:"🥥",time:"Base · Side",
+    ing:["½ cup grated coconut","1 green chili","Small piece ginger","1 tbsp roasted chana dal (optional, for body)","Salt, water","Tempering: ½ tsp mustard seeds, few curry leaves, 1 dried red chili, 1 tsp coconut oil"],
+    steps:["Blend the coconut, green chili, ginger, chana dal, salt and a little water into a smooth paste.","Heat coconut oil, pop mustard seeds, add curry leaves and red chili, and pour over. Mix and serve."],
+    note:"Use coconut oil for the tempering to get the Kerala aroma."},
+  SAMB:{name:"Kerala Sambar",em:"🥘",time:"Base · Lentil stew",
+    ing:["¾ cup toor dal or red lentils","2 cups mixed veg (carrot, beans, zucchini, tomato, shallots)","1½ tbsp sambar powder","1 tsp tamarind paste","¼ tsp turmeric","½ tsp mustard seeds, few curry leaves, 1 dried red chili","1 tbsp coconut oil, salt"],
+    steps:["Cook the lentils with turmeric in 2.5 cups water until soft and mushy; mash.","Add the chopped vegetables, sambar powder, tamarind and 1 cup water; simmer 12–15 min until tender.","Temper mustard seeds, red chili and curry leaves in coconut oil and pour over. Season and serve."],
+    note:"Make a batch — it keeps 3 days and pairs with dosa, idli or millet."},
+  KADALA:{name:"Kadala Curry (Black Chickpea)",em:"🫘",time:"Base · Curry",
+    ing:["1 cup black chickpeas (kadala), soaked overnight & cooked","½ cup grated coconut","5 shallots or ½ onion","1 tsp coriander powder","½ tsp chili powder, ¼ tsp turmeric","¼ tsp garam masala","½ tsp mustard seeds, few curry leaves","1 tbsp coconut oil, salt"],
+    steps:["Lightly roast the grated coconut with the spices, then grind to a paste with a little water.","Temper mustard seeds and curry leaves in coconut oil; sauté shallots till soft.","Add the coconut-spice paste and the cooked kadala with 1 cup of its cooking water; simmer 10 min and season."],
+    note:"Soak the black chickpeas (kadala) the day before and discard the soaking water. Classic with ragi idli, puttu or appam."}
 };
 
 /* ---------- 28-day schedule: [breakfast, lunch, 4pm, dinner] ---------- */
 const WEEKS = [
-  { title:"Week 1 — Eggs, Chicken & Salmon",
-    intro:"Gentle start with simple egg breakfasts, chicken and bean lunches, and baked dinners.",
+  { title:"Week 1 — Ragi, Sambar, Chicken & Avial",
+    intro:"Gentle start: ragi dosa and millet upma, sambar with thoran, and chicken or avial dinners.",
     days:[
-      ["B1","L1","P1","D1"],["B2","L2","P1","D3"],["B1","L1","P1","D2"],
-      ["B2","L2","P1","D1"],["B1","L1","P1","D3"],["B2","L2","P1","D2"],["B1","L1","P1","D1"]
+      ["KB1","KL1","KP1","KD1"],["KB3","KL3","KP1","KD2"],["KB1","KL1","KP1","KD3"],
+      ["KB3","KL3","KP1","KD1"],["KB1","KL1","KP1","KD2"],["KB3","KL3","KP1","KD3"],["KB1","KL1","KP1","KD1"]
     ],
     grocery:[
-      ["🥚","Eggs","1 dozen"],["🥬","Fresh spinach","1 bag (5 oz)"],["🍅","Tomatoes","3"],
-      ["🥑","Avocados","4"],["🥛","Plain Greek yogurt (full-fat)","1 large tub"],["🫐","Blueberries","1 pack (or frozen)"],
-      ["🌱","Chia seeds","1 small bag"],["🌰","Walnuts","1 small bag"],["🍗","Chicken breast","4 (~1.5 lb)"],
-      ["🥬","Mixed salad greens","2 bags"],["🥒","Cucumbers","3"],["🍋","Lemons","2"],["🫒","Olive oil","1 bottle"],
-      ["🫘","Black beans (canned)","3 cans"],["🫑","Bell peppers","3"],["🧅","Onions","2"],["🥫","Salsa","1 jar"],
-      ["🍵","Bone broth","2–3 cartons (32 oz)"],["🥜","Almonds","1 bag"],["🍎","Apples","4"],["🍣","Salmon fillets","3"],
-      ["🥦","Broccoli","2 crowns (or 1 frozen bag)"],["🍗","Chicken thighs","4"],["🫛","Green beans","1 bag"],
-      ["🦃","Ground turkey","1 lb"],["🥒","Zucchini","3"],["🧂","Salt, pepper, garlic","if needed"]
+      ["🌾","Ragi flour (finger millet)","1 bag"],["🌾","Foxtail / little millet","1 large bag"],
+      ["🫘","Toor dal or red lentils (sambar)","1 bag"],["🥛","Plain whole-milk yogurt (curd)","1 large tub"],
+      ["🧆","Chickpeas (canned, for sundal)","2 cans"],["🥥","Frozen grated coconut","1 pack"],
+      ["🧅","Onions / shallots","4"],["🍅","Tomatoes","5"],["🥕","Carrots","4"],["🫛","Green beans","1 bag"],
+      ["🥬","Cabbage","1 head"],["🥒","Cucumbers","3"],["🥒","Zucchini (for avial)","2"],
+      ["🍗","Chicken (curry pieces)","~1.5 lb"],["🍵","Bone broth","2–3 cartons (32 oz)"],
+      ["🌿","Fresh coriander (optional)","1 bunch"]
     ]
   },
-  { title:"Week 2 — Tuna, Lentils, Turkey & Beef",
-    intro:"Pantry-friendly week: tuna and lentil lunches, plus turkey, beef and chili dinners.",
+  { title:"Week 2 — Moong Dosa, Olan, Fish & Tofu",
+    intro:"Protein-forward week: moong dosa and millet upma, green gram curry and olan, with fish and tofu dinners.",
     days:[
-      ["B3","L3","P2","D2"],["B4","L4","P2","D4"],["B3","L3","P2","D5"],
-      ["B4","L4","P2","D2"],["B3","L3","P2","D4"],["B4","L4","P2","D5"],["B3","L3","P2","D2"]
+      ["KB4","KL2","KP2","KD4"],["KB3","KL4","KP2","KD5"],["KB4","KL2","KP2","KD2"],
+      ["KB3","KL4","KP2","KD4"],["KB4","KL2","KP2","KD5"],["KB3","KL4","KP2","KD2"],["KB4","KL2","KP2","KD4"]
     ],
     grocery:[
-      ["🥚","Eggs","1 dozen"],["🥑","Avocados","4"],["🥒","Cucumbers","2"],["🌱","Chia seeds","1 small bag (if needed)"],
-      ["🥛","Unsweetened almond milk","1 carton"],["🫐","Blueberries","1 pack (or frozen)"],
-      ["🐟","Canned tuna (in water)","4 cans"],["🫒","Olive oil","1 bottle (if needed)"],["🥬","Celery","1 bunch"],
-      ["🥬","Mixed salad greens","2 bags"],["🫘","Lentils (canned or dried)","3 cans / 1 bag"],["🥕","Carrots","3"],
-      ["🧅","Onions","2"],["🧄","Garlic","1 bulb"],["🍵","Bone broth","3 cartons"],["🦃","Ground turkey","2.5 lb"],
-      ["🥒","Zucchini","2"],["🥫","Diced tomatoes (canned)","4 cans"],["🥩","Beef strips (stir-fry)","1 lb"],
-      ["🥦","Frozen stir-fry vegetables","2 bags"],["🫘","Black or kidney beans (canned)","2 cans"],
-      ["🌶️","Chili powder","1 small jar"],["🥜","Natural peanut butter","1 jar"],["🧂","Salt & pepper","if needed"]
+      ["🫘","Whole green moong (cherupayar)","1 bag"],["🫘","Split moong dal (kosambari)","1 small bag"],
+      ["🌾","Foxtail / little millet","1 large bag"],["🫘","Cowpeas / black-eyed peas (olan)","1 bag"],
+      ["🥥","Frozen grated coconut","1 pack"],["🥬","Ash gourd or zucchini (olan)","2"],
+      ["🧅","Onions / shallots","4"],["🍅","Tomatoes","4"],["🥕","Carrots","3"],["🫛","Green beans","1 bag"],
+      ["🥦","Cauliflower (for stew)","1 small"],["🥒","Cucumbers","3"],["🥬","Spinach","1 bag"],
+      ["🥬","Cabbage (thoran)","1 head"],["🐟","White fish fillets (tilapia/cod)","~1 lb"],
+      ["🧊","Tofu (or paneer)","1 block"],["🍗","Chicken (curry pieces)","~1 lb"],["🍵","Bone broth","2–3 cartons"]
     ]
   },
-  { title:"Week 3 — Eggs, Chicken, Salmon & Beef",
-    intro:"Back to fresh basics with chicken-and-bean lunches and a mix of baked and stir-fry dinners.",
+  { title:"Week 3 — Ragi Idli, Curd Millet, Chicken/Fish/Avial",
+    intro:"Back to fresh basics with ragi idli and kadala curry, sambar and curd millet, and a chicken/fish/avial dinner rotation.",
     days:[
-      ["B1","L1","P3","D1"],["B3","L2","P3","D3"],["B1","L1","P3","D4"],
-      ["B3","L2","P3","D1"],["B1","L1","P3","D3"],["B3","L2","P3","D4"],["B1","L1","P3","D1"]
+      ["KB2","KL1","KP3","KD2"],["KB1","KL3","KP3","KD3"],["KB2","KL1","KP3","KD4"],
+      ["KB1","KL3","KP3","KD2"],["KB2","KL1","KP3","KD3"],["KB1","KL3","KP3","KD4"],["KB2","KL1","KP3","KD2"]
     ],
     grocery:[
-      ["🥚","Eggs","1 dozen"],["🥬","Fresh spinach","1 bag"],["🍅","Tomatoes","3"],["🥑","Avocados","4"],
-      ["🥒","Cucumbers","3"],["🍗","Chicken breast","4"],["🥬","Mixed salad greens","2 bags"],["🍋","Lemons","2"],
-      ["🫒","Olive oil","1 bottle (if needed)"],["🫘","Black beans (canned)","3 cans"],["🫑","Bell peppers","3"],
-      ["🧅","Onions","2"],["🥫","Salsa","1 jar"],["🥣","Hummus","1 tub"],["🍵","Bone broth","2–3 cartons"],
-      ["🍣","Salmon fillets","3"],["🥦","Broccoli","2 crowns (or frozen)"],["🍗","Chicken thighs","2"],
-      ["🫛","Green beans","1 bag"],["🥬","Cauliflower","1 head (or frozen)"],["🥩","Beef strips (stir-fry)","1 lb"],
-      ["🥦","Frozen stir-fry vegetables","2 bags"],["🧄","Garlic","1 bulb"],["🧂","Salt & pepper","if needed"]
+      ["🌾","Ragi flour (finger millet)","1 bag"],["🌾","Foxtail / little millet","1 large bag"],
+      ["🫘","Black chickpeas / kadala","1 bag"],["🫘","Toor dal or red lentils (sambar)","1 bag"],
+      ["🥛","Plain whole-milk yogurt (curd)","1 large tub"],["🥥","Frozen grated coconut","1 pack"],
+      ["🧅","Onions / shallots","4"],["🍅","Tomatoes","5"],["🥕","Carrots","4"],["🫛","Green beans","1 bag"],
+      ["🥬","Cabbage","1 head"],["🥒","Cucumbers","3"],["🥒","Zucchini (for avial)","2"],
+      ["🥬","Spinach (fish-curry side)","1 bag"],["🍗","Chicken (curry pieces)","~1.5 lb"],
+      ["🐟","White fish fillets","~1 lb"],["🍵","Bone broth","2–3 cartons"]
     ]
   },
-  { title:"Week 4 — Tuna, Beans, Chicken & Turkey",
-    intro:"Finish strong with yogurt and chia breakfasts, tuna/bean lunches, and family-style dinners.",
+  { title:"Week 4 — Moong Dosa, Cherupayar, Tofu/Avial/Fish",
+    intro:"Finish strong: moong dosa and millet upma, green gram curry and olan, with tofu, avial and fish dinners.",
     days:[
-      ["B2","L3","P4","D3"],["B4","L2","P4","D2"],["B2","L3","P4","D5"],
-      ["B4","L2","P4","D3"],["B2","L3","P4","D2"],["B4","L2","P4","D5"],["B2","L3","P4","D3"]
+      ["KB4","KL2","KP4","KD5"],["KB3","KL4","KP4","KD3"],["KB4","KL2","KP4","KD4"],
+      ["KB3","KL4","KP4","KD5"],["KB4","KL2","KP4","KD3"],["KB3","KL4","KP4","KD4"],["KB4","KL2","KP4","KD5"]
     ],
     grocery:[
-      ["🥛","Plain Greek yogurt (full-fat)","1 large tub"],["🫐","Blueberries","1–2 packs (or frozen)"],
-      ["🌱","Chia seeds","1 small bag (if needed)"],["🌰","Walnuts","1 small bag"],["🥛","Unsweetened almond milk","1 carton"],
-      ["🫘","Black beans (canned)","5 cans"],["🫑","Bell peppers","3"],["🧅","Onions","2"],["🥑","Avocados","3"],
-      ["🥫","Salsa","1 jar"],["🐟","Canned tuna (in water)","4 cans"],["🫒","Olive oil","1 bottle (if needed)"],
-      ["🥬","Celery","1 bunch"],["🥬","Mixed salad greens","2 bags"],["🧀","Cottage cheese","1 tub"],
-      ["🍵","Bone broth","2–3 cartons"],["🍗","Chicken thighs","4"],["🫛","Green beans","1 bag"],
-      ["🥬","Cauliflower","1 head (or frozen)"],["🦃","Ground turkey","2 lb"],["🥒","Zucchini","2"],
-      ["🥫","Diced tomatoes (canned)","3 cans"],["🌶️","Chili powder","1 small jar (if needed)"],["🧂","Salt & pepper","if needed"]
+      ["🫘","Whole green moong (cherupayar)","1 bag"],["🌾","Foxtail / little millet","1 large bag"],
+      ["🫘","Cowpeas / black-eyed peas (olan)","1 bag"],["🫘","Roasted chana / dalia (snack)","1 bag"],
+      ["🥥","Frozen grated coconut","1 pack"],["🥬","Ash gourd or zucchini (olan)","2"],
+      ["🧅","Onions / shallots","4"],["🍅","Tomatoes","4"],["🥕","Carrots","4"],["🫛","Green beans","1 bag"],
+      ["🥦","Cauliflower (for stew)","1 small"],["🥒","Cucumbers","3"],["🥬","Spinach (fish-curry side)","1 bag"],
+      ["🧊","Tofu (or paneer)","1 block"],["🐟","White fish fillets","~1 lb"],["🥛","Plain yogurt (curd)","1 tub"],
+      ["🍵","Bone broth","2–3 cartons"]
     ]
   }
 ];
 
-const BETWEEN = "Between meals · water all day · black coffee or green/herbal tea (no sugar) · optional: a few almonds or veggie sticks";
+const BETWEEN = "Between meals · water all day · plain coffee/tea or Kerala sambaram (no sugar) · optional: cucumber or roasted chana";
 
 /* ---------- render ---------- */
 function mealRow(code, slotIdx){
@@ -389,6 +442,16 @@ function mealRow(code, slotIdx){
     </button>`;
 }
 
+function prepStrip(codes){
+  const items = [];
+  codes.forEach(c => { if (R[c] && R[c].prep) items.push(R[c].prep); });
+  const uniq = [...new Set(items)];
+  if (!uniq.length){
+    return `<div class="prep clear"><span class="pm">✓</span><span>No overnight prep — grab-and-cook day</span></div>`;
+  }
+  return `<div class="prep"><span class="pm">🌙</span><span><b>Prep the night before:</b> ${uniq.join("; ")}</span></div>`;
+}
+
 function renderWeek(w, idx){
   const panel = document.getElementById("week"+(idx+1));
   let days = "";
@@ -396,6 +459,7 @@ function renderWeek(w, idx){
     const dayNum = idx*7 + di + 1;
     days += `<div class="day">
       <div class="dh"><span class="n">Day ${dayNum}</span><span class="eyebrow">${dayLabel(di)}</span></div>
+      ${prepStrip(codes)}
       ${mealRow(codes[0],1)}${mealRow(codes[1],2)}${mealRow(codes[2],3)}${mealRow(codes[3],4)}
       <div class="between">${BETWEEN}</div>
     </div>`;
@@ -417,14 +481,13 @@ function renderWeek(w, idx){
     <div class="days">${days}</div>
     <div class="grocery">
       <h3>🛒 Week ${idx+1} grocery list</h3>
-      <p class="lead" style="margin:.2em 0 0">Simple staples for one person, all available at Walmart. Tap items as you shop.</p>
+      <p class="lead" style="margin:.2em 0 0">Fresh items for the week (pantry &amp; spices are bought once — see Overview). Tap items as you shop.</p>
       <div class="gtools">
         <button class="gbtn" data-clear="${idx}">Clear all</button>
       </div>
       <ul class="glist">${items}</ul>
     </div>`;
 
-  // restore checked state
   applyChecks(idx);
 }
 
@@ -432,7 +495,7 @@ function dayLabel(i){ return ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"][i]; }
 
 function renderRecipes(){
   const grid = document.getElementById("recipeGrid");
-  const order = ["B1","B2","B3","B4","L1","L2","L3","L4","P1","P2","P3","P4","D1","D2","D3","D4","D5"];
+  const order = ["KB1","KB2","KB3","KB4","KL1","KL2","KL3","KL4","KP1","KP2","KP3","KP4","KD1","KD2","KD3","KD4","KD5","CHUT","SAMB","KADALA"];
   grid.innerHTML = order.map(code => {
     const r = R[code];
     return `<article class="recipe" id="r-${code}">
@@ -442,14 +505,14 @@ function renderRecipes(){
         <ul>${r.ing.map(i=>`<li>${i}</li>`).join("")}</ul>
         <h4>Steps</h4>
         <ol>${r.steps.map(s=>`<li>${s}</li>`).join("")}</ol>
-        ${r.note ? `<span class="tag">⚠️ ${r.note}</span>` : ""}
+        ${r.note ? `<span class="tag">${r.note}</span>` : ""}
       </div>
     </article>`;
   }).join("");
 }
 
 /* ---------- grocery checkbox state ---------- */
-function checkKey(w){ return "grx-w"+w; }
+function checkKey(w){ return "krx-w"+w; }
 function getChecked(w){
   const raw = store.get(checkKey(w));
   try { return raw ? JSON.parse(raw) : []; } catch(e){ return []; }
@@ -477,7 +540,7 @@ function toggleCheck(el){
 function switchTab(id){
   document.querySelectorAll(".tab").forEach(t => t.classList.toggle("active", t.dataset.tab === id));
   document.querySelectorAll(".panel").forEach(p => p.classList.toggle("active", p.id === id));
-  window.scrollTo({top:0, behavior:"instant" in window ? "instant" : "auto"});
+  window.scrollTo({top:0, behavior:"auto"});
 }
 
 function showRecipe(code){
